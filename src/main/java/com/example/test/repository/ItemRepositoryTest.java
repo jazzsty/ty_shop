@@ -3,21 +3,23 @@ package com.example.test.repository;
 import java.time.LocalDateTime;
 import java.util.List;
 
-//import org.junit.jupiter.*;
-import org.junit.Test;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+//import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import com.example.item.constant.ItemSellStatus;
 import com.example.item.entity.Item;
 import com.example.item.repository.ItemRepository;
 
+@SpringBootTest
 class ItemRepositoryTest {
 	
 	@Autowired
 	ItemRepository itemRepository;
 	
 	public void createItemList() {
-		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 		for(int i=1; i<=10; i++) {
 			Item item = new Item();
 			item.setItemNm("테스트 상품" + i);
@@ -30,11 +32,10 @@ class ItemRepositoryTest {
 			
 			itemRepository.save(item);
 		}
-		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 	}
 	
 	@Test
-//	@DisplayName("상품명 조회 테스트")
+	@DisplayName("상품명 조회 테스트")
 	public void findByItemNmTest() {
 		this.createItemList();
 		List<Item> itemList = itemRepository.findByItemNm("테스트 상품1");
